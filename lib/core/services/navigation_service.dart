@@ -4,7 +4,6 @@ import '../constants/key_constant.dart';
 class NavigationService {
   static NavigatorState get navigator => AppKeys.navigatorKey.currentState!;
 
-  // Core Navigation Methods
   static Future<void> toWelcome() async {
     await navigator.pushNamedAndRemoveUntil(
       AppRoutes.welcome,
@@ -48,22 +47,14 @@ class NavigationService {
     );
   }
 
-  // Generic Navigation Methods
-  static Future<T?> pushNamed<T>(
-    String routeName, {
-    Object? arguments,
-  }) async {
+  static Future<T?> pushNamed<T>(String routeName, {Object? arguments}) async {
     return await navigator.pushNamed<T>(
       routeName,
       arguments: arguments,
     );
   }
 
-  static Future<T?> pushReplacementNamed<T, TO>(
-    String routeName, {
-    Object? arguments,
-    TO? result,
-  }) async {
+  static Future<T?> pushReplacementNamed<T, TO>(String routeName, {Object? arguments, TO? result}) async {
     return await navigator.pushReplacementNamed<T, TO>(
       routeName,
       arguments: arguments,
@@ -71,11 +62,7 @@ class NavigationService {
     );
   }
 
-  static Future<T?> pushNamedAndRemoveUntil<T>(
-    String newRouteName,
-    bool Function(Route<dynamic>) predicate, {
-    Object? arguments,
-  }) async {
+  static Future<T?> pushNamedAndRemoveUntil<T>(String newRouteName, bool Function(Route<dynamic>) predicate, {Object? arguments}) async {
     return await navigator.pushNamedAndRemoveUntil<T>(
       newRouteName,
       predicate,
@@ -97,7 +84,6 @@ class NavigationService {
     navigator.pop<T>(result);
   }
 
-  // Utility Methods
   static bool canPop() {
     return navigator.canPop();
   }
@@ -111,12 +97,7 @@ class NavigationService {
     return currentRouteName;
   }
 
-  // Dialog Navigation
-  static Future<T?> showCustomDialog<T>({
-    required Widget dialog,
-    bool barrierDismissible = true,
-    Color? barrierColor,
-  }) {
+  static Future<T?> showCustomDialog<T>({required Widget dialog, bool barrierDismissible = true, Color? barrierColor}) {
     return showDialog<T>(
       context: navigator.context,
       barrierDismissible: barrierDismissible,
@@ -125,13 +106,7 @@ class NavigationService {
     );
   }
 
-  // Bottom Sheet Navigation
-  static Future<T?> showCustomBottomSheet<T>({
-    required Widget child,
-    bool isDismissible = true,
-    bool enableDrag = true,
-    Color? backgroundColor,
-  }) {
+  static Future<T?> showCustomBottomSheet<T>({required Widget child, bool isDismissible = true, bool enableDrag = true, Color? backgroundColor}) {
     return showModalBottomSheet<T>(
       context: navigator.context,
       isDismissible: isDismissible,
@@ -145,7 +120,6 @@ class NavigationService {
   }
 }
 
-// Route Constants
 class AppRoutes {
   static const String welcome = '/';
   static const String login = '/login';
@@ -158,7 +132,6 @@ class AppRoutes {
   AppRoutes._();
 }
 
-// Route Arguments
 abstract class RouteArguments {}
 
 class RestaurantDetailArguments extends RouteArguments {

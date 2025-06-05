@@ -195,12 +195,21 @@ class DialogService {
       builder: (context) => PopScope(
         canPop: false,
         child: AlertDialog(
-          content: Row(
-            children: [
-              const CircularProgressIndicator(),
-              const SizedBox(width: 16),
-              Text(message ?? AppStrings.loading),
-            ],
+          content: SizedBox(
+            width: 100,
+            height: 80,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              spacing: 16,
+              children: [
+                const CircularProgressIndicator(),
+                Expanded(
+                  child: Text(
+                    message ?? AppStrings.loading,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -208,7 +217,9 @@ class DialogService {
   }
 
   static void hideLoading() {
-    Navigator.of(context).pop();
+    if (Navigator.of(context).canPop()) {
+      Navigator.of(context).pop();
+    }
   }
 
   // Input Dialog
