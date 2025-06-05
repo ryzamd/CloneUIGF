@@ -50,7 +50,6 @@ class WelcomeBanner extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 16),
-          // Illustration placeholder
           Container(
             width: 100,
             height: 100,
@@ -59,9 +58,9 @@ class WelcomeBanner extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: const Icon(
-              Icons.person_add,
+              Icons.person,
               color: AppColors.white,
-              size: 48,
+              size: 64,
             ),
           ),
         ],

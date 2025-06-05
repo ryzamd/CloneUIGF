@@ -28,7 +28,6 @@ class CategorySection extends StatelessWidget {
             label: 'Đồ ăn',
             backgroundColor: Color(0xFFE8F5E8),
             iconColor: AppColors.primaryGreen,
-            isActive: true,
           ),
           _CategoryItem(
             icon: Icons.grid_view,
@@ -47,14 +46,12 @@ class _CategoryItem extends StatelessWidget {
   final String label;
   final Color backgroundColor;
   final Color iconColor;
-  final bool isActive;
 
   const _CategoryItem({
     required this.icon,
     required this.label,
     required this.backgroundColor,
     required this.iconColor,
-    this.isActive = false,
   });
 
   @override
@@ -67,9 +64,6 @@ class _CategoryItem extends StatelessWidget {
           decoration: BoxDecoration(
             color: backgroundColor,
             shape: BoxShape.circle,
-            border: isActive
-              ? Border.all(color: AppColors.primaryGreen, width: 2)
-              : null,
           ),
           child: Icon(
             icon,
@@ -80,10 +74,6 @@ class _CategoryItem extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           label,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: isActive ? AppColors.primaryGreen : AppColors.textPrimary,
-            fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
-          ),
         ),
       ],
     );

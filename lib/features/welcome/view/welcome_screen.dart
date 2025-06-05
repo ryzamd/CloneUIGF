@@ -19,8 +19,6 @@ class WelcomeScreen extends StatelessWidget {
       body: const SafeArea(
         child: Column(
           children: [
-            _StatusBar(),
-            
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -34,8 +32,6 @@ class WelcomeScreen extends StatelessWidget {
                     FoodSection(),
                     
                     ShoppingSection(),
-                    
-                    SizedBox(height: 100),
                   ],
                 ),
               ),
@@ -44,64 +40,6 @@ class WelcomeScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: const BottomButtons(),
-    );
-  }
-}
-
-class _StatusBar extends StatelessWidget {
-  const _StatusBar();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 40,
-      color: AppColors.primaryGreen,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Row(
-        children: [
-          const Text(
-            '08:18',
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const Icon(
-            Icons.location_on,
-            color: AppColors.white,
-            size: 16,
-          ),
-          const Spacer(),
-          const Icon(
-            Icons.signal_cellular_4_bar,
-            color: AppColors.white,
-            size: 16,
-          ),
-          const SizedBox(width: 4),
-          const Icon(
-            Icons.wifi,
-            color: AppColors.white,
-            size: 16,
-          ),
-          const SizedBox(width: 4),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: const Text(
-              '79',
-              style: TextStyle(
-                color: AppColors.primaryGreen,
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
