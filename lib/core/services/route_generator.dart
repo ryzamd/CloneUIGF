@@ -1,3 +1,4 @@
+import 'package:cloneuigrabfood/features/auth/login/view/login_screen.dart';
 import 'package:flutter/material.dart';
 import '../../features/welcome/view/welcome_screen.dart';
 import 'navigation_service.dart';
@@ -86,12 +87,6 @@ class RouteGenerator {
       ),
     );
   }
-}
-
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
-  @override
-  Widget build(BuildContext context) => const Placeholder();
 }
 
 class RegisterScreen extends StatelessWidget {

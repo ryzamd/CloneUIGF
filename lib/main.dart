@@ -1,3 +1,4 @@
+import 'package:cloneuigrabfood/di/dependency_injection.dart';
 import 'package:flutter/material.dart';
 import 'core/core.dart';
 
@@ -6,6 +7,8 @@ void main() async {
   
   // Initialize app configuration
   AppConfig.initialize(Environment.development);
+  
+  await setupDependencies();
   
   runApp(const MyApp());
 }
@@ -31,7 +34,7 @@ class MyApp extends StatelessWidget {
       ),
       
       // Debug settings
-      debugShowCheckedModeBanner: AppConfig.isDevelopment,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
