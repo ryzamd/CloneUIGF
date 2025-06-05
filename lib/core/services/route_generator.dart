@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../features/welcome/view/welcome_screen.dart';
 import 'navigation_service.dart';
 
 class RouteGenerator {
@@ -78,94 +79,6 @@ class RouteGenerator {
               ElevatedButton(
                 onPressed: () => NavigationService.toWelcome(),
                 child: const Text('Go Home'),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// Placeholder screens - sẽ replace sau
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
-  
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF8F8F8),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // App Logo/Icon
-              Container(
-                height: 120,
-                width: 120,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF00AA13),
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.restaurant,
-                  size: 60,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 32),
-              
-              // Welcome text
-              const Text(
-                'Chào mừng đến với',
-                style: TextStyle(fontSize: 20, color: Color(0xFF666666)),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'GrabFood',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF00AA13),
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                'Đặt món ngon, giao nhanh tận nơi',
-                style: TextStyle(fontSize: 16, color: Color(0xFF666666)),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 48),
-              
-              // Get Started Button
-              SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: ElevatedButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Core setup complete! 🎉'),
-                        backgroundColor: Color(0xFF00AA13),
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF00AA13),
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: const Text(
-                    'Bắt đầu',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                  ),
-                ),
               ),
             ],
           ),
