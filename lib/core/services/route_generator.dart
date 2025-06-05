@@ -1,5 +1,6 @@
 import 'package:cloneuigrabfood/features/auth/login/view/login_screen.dart';
 import 'package:flutter/material.dart';
+import '../../features/dashboard/view/dashboard_screen.dart';
 import '../../features/welcome/view/welcome_screen.dart';
 import 'navigation_service.dart';
 
@@ -47,7 +48,6 @@ class RouteGenerator {
       settings: settings,
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        // Custom slide transition
         const begin = Offset(1.0, 0.0);
         const end = Offset.zero;
         const curve = Curves.easeInOut;
@@ -91,12 +91,6 @@ class RouteGenerator {
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
-  @override
-  Widget build(BuildContext context) => const Placeholder();
-}
-
-class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
   @override
   Widget build(BuildContext context) => const Placeholder();
 }
