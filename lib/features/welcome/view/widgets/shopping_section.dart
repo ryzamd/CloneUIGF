@@ -22,45 +22,45 @@ class ShoppingSection extends StatelessWidget {
               ),
               const Icon(
                 Icons.arrow_forward,
-                color: AppColors.primaryGreen,
+                color: AppColors.black,
               ),
             ],
           ),
         ),
+        SizedBox(height: 5,),
         SizedBox(
           height: 160,
           child: ListView(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            children: const [
+            children: [
               _ShoppingItem(
-                label: 'Thực phẩm\ntươi',
                 image: _FoodImage(
                   icon: Icons.eco,
-                  secondaryIcon: Icons.apple,
-                  backgroundColor: Color(0xFFFFF4E6),
+                  textTitle: "Thực phẩm \ntươi",
+                  backgroundColor: Colors.grey.shade200,
                   iconColor: Colors.green,
-                  secondaryColor: Colors.orange,
+                  secondaryColor: Colors.black,
                 ),
               ),
               SizedBox(width: 16),
               _ShoppingItem(
-                label: 'Thịt và\nhải sản',
                 image: _FoodImage(
                   icon: Icons.set_meal,
-                  secondaryIcon: Icons.restaurant,
-                  backgroundColor: Color(0xFFFFE6E6),
+                  textTitle: "Thịt Hải và \nsản",
+                  backgroundColor: Colors.grey.shade200,
                   iconColor: Colors.red,
-                  secondaryColor: Colors.blue,
+                  secondaryColor: Colors.black,
                 ),
               ),
               SizedBox(width: 16),
               _ShoppingItem(
-                label: 'Vào\nGrabMart',
                 image: _FoodImage(
-                  icon: Icons.shopping_cart,
-                  backgroundColor: Color(0xFFE6F2FF),
+                  icon: Icons.arrow_forward_sharp,
+                  textTitle: "Vào Grab\nMart",
+                  backgroundColor: Colors.grey.shade200,
                   iconColor: AppColors.primaryGreen,
+                  secondaryColor: Colors.black,
                 ),
               ),
             ],
@@ -72,11 +72,9 @@ class ShoppingSection extends StatelessWidget {
 }
 
 class _ShoppingItem extends StatelessWidget {
-  final String label;
   final Widget image;
 
   const _ShoppingItem({
-    required this.label,
     required this.image,
   });
 
@@ -85,8 +83,8 @@ class _ShoppingItem extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 100,
-          height: 100,
+          width: 110,
+          height: 110,
           decoration: BoxDecoration(
             color: AppColors.white,
             borderRadius: BorderRadius.circular(16),
@@ -94,7 +92,6 @@ class _ShoppingItem extends StatelessWidget {
               BoxShadow(
                 color: AppColors.shadowLight,
                 blurRadius: 4,
-                offset: const Offset(0, 2),
               ),
             ],
           ),
@@ -103,12 +100,6 @@ class _ShoppingItem extends StatelessWidget {
             child: image,
           ),
         ),
-        const SizedBox(height: 8),
-        Text(
-          label,
-          style: Theme.of(context).textTheme.bodySmall,
-          textAlign: TextAlign.center,
-        ),
       ],
     );
   }
@@ -116,14 +107,14 @@ class _ShoppingItem extends StatelessWidget {
 
 class _FoodImage extends StatelessWidget {
   final IconData icon;
-  final IconData? secondaryIcon;
+  final String? textTitle;
   final Color backgroundColor;
   final Color iconColor;
   final Color? secondaryColor;
 
   const _FoodImage({
     required this.icon,
-    this.secondaryIcon,
+    this.textTitle,
     required this.backgroundColor,
     required this.iconColor,
     this.secondaryColor,
@@ -136,22 +127,25 @@ class _FoodImage extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            left: 10,
-            bottom: 10,
+            right: 5,
+            bottom: 5,
             child: Icon(
               icon,
               color: iconColor,
               size: 40,
             ),
           ),
-          if (secondaryIcon != null)
+          if (textTitle != null)
             Positioned(
-              right: 10,
-              top: 10,
-              child: Icon(
-                secondaryIcon,
-                color: secondaryColor ?? iconColor,
-                size: 30,
+              left: 10,
+              top: 5,
+              child: Text(
+                textTitle!,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: secondaryColor ?? iconColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16
+                )
               ),
             ),
         ],

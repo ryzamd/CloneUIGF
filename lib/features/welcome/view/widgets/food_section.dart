@@ -20,38 +20,45 @@ class FoodSection extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              const Icon(
-                Icons.arrow_forward,
-                color: AppColors.primaryGreen,
-              ),
+              const Icon(Icons.arrow_forward, color: AppColors.black),
             ],
           ),
         ),
+        SizedBox(height: 5),
         SizedBox(
           height: 120,
           child: ListView(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            children: const [
+            children: [
               _FoodItem(
-                icon: Icons.emoji_events,
-                label: 'Bán chạy',
-                iconColor: Colors.amber,
-                backgroundColor: Color(0xFFFFF9E6),
+                image: _FoodImage(
+                  icon: Icons.star_border_rounded,
+                  textTitle: "Bán chạy",
+                  backgroundColor: Colors.grey.shade200,
+                  iconColor: Colors.green,
+                  secondaryColor: Colors.black,
+                ),
               ),
               SizedBox(width: 16),
               _FoodItem(
-                icon: Icons.local_offer,
-                label: 'Đặc sản\nngon rẻ',
-                iconColor: AppColors.primaryGreen,
-                backgroundColor: Color(0xFFE8F5E8),
+                image: _FoodImage(
+                  icon: Icons.restaurant_menu_rounded,
+                  textTitle: "Đặc sản \nngon rẻ",
+                  backgroundColor: Colors.grey.shade200,
+                  iconColor: Colors.red,
+                  secondaryColor: Colors.black,
+                ),
               ),
               SizedBox(width: 16),
               _FoodItem(
-                icon: Icons.access_time,
-                label: 'Gần đây',
-                iconColor: Colors.blue,
-                backgroundColor: Color(0xFFE6F2FF),
+                image: _FoodImage(
+                  icon: Icons.list_rounded,
+                  textTitle: "Gần đây",
+                  backgroundColor: Colors.grey.shade200,
+                  iconColor: AppColors.primaryGreen,
+                  secondaryColor: Colors.black,
+                ),
               ),
             ],
           ),
@@ -62,42 +69,73 @@ class FoodSection extends StatelessWidget {
 }
 
 class _FoodItem extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final Color iconColor;
-  final Color backgroundColor;
+  final Widget image;
 
-  const _FoodItem({
-    required this.icon,
-    required this.label,
-    required this.iconColor,
-    required this.backgroundColor,
-  });
+  const _FoodItem({required this.image});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-          width: 80,
-          height: 80,
+          width: 110,
+          height: 110,
           decoration: BoxDecoration(
-            color: backgroundColor,
+            color: AppColors.white,
             borderRadius: BorderRadius.circular(16),
+            boxShadow: [BoxShadow(color: AppColors.shadowLight, blurRadius: 4)],
           ),
-          child: Icon(
-            icon,
-            color: iconColor,
-            size: 40,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: image,
           ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          label,
-          style: Theme.of(context).textTheme.bodySmall,
-          textAlign: TextAlign.center,
         ),
       ],
+    );
+  }
+}
+
+class _FoodImage extends StatelessWidget {
+  final IconData icon;
+  final String? textTitle;
+  final Color backgroundColor;
+  final Color iconColor;
+  final Color? secondaryColor;
+
+  const _FoodImage({
+    required this.icon,
+    this.textTitle,
+    required this.backgroundColor,
+    required this.iconColor,
+    this.secondaryColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: backgroundColor,
+      child: Stack(
+        children: [
+          Positioned(
+            right: 5,
+            bottom: 5,
+            child: Icon(icon, color: iconColor, size: 40),
+          ),
+          if (textTitle != null)
+            Positioned(
+              left: 10,
+              top: 5,
+              child: Text(
+                textTitle!,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: secondaryColor ?? iconColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }
