@@ -25,3 +25,16 @@ class LoginWithPhone extends LoginEvent {
 class LoginWithFaceId extends LoginEvent {
   const LoginWithFaceId();
 }
+
+class LoginWithCredentials extends LoginEvent {
+  final String email;
+  final String password;
+
+  const LoginWithCredentials({
+    required this.email,
+    required this.password,
+  });
+
+  @override
+  List<Object?> get props => [email, password];
+}

@@ -14,6 +14,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginWithSocial>(_onLoginWithSocial);
     on<LoginWithPhone>(_onLoginWithPhone);
     on<LoginWithFaceId>(_onLoginWithFaceId);
+    on<LoginWithCredentials>(_onLoginWithCredentials);
   }
 
   Future<void> _onLoginWithSocial(LoginWithSocial event, Emitter<LoginState> emit) async {
@@ -43,6 +44,24 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     try {
       final result = await loginUseCase.loginWithBiometric();
+      
+      result.fold(
+        (failure) => emit(LoginFailure(failure.message)),
+        (user) => emit(LoginSuccess(UserViewModel.fromEntity(user))),
+      );
+    } catch (e) {
+      emit(LoginFailure('Đã có lỗi xảy ra: ${e.toString()}'));
+    }
+  }
+
+  Future<void> _onLoginWithCredentials(LoginWithCredentials event, Emitter<LoginState> emit) async {
+    emit(LoginLoading());
+
+    try {
+      final result = await loginUseCase.loginWithCredentials(
+        email: event.email,
+        password: event.password,
+      );
       
       result.fold(
         (failure) => emit(LoginFailure(failure.message)),

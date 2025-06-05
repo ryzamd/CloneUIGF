@@ -28,16 +28,3 @@ class LoginFailure extends LoginState {
   @override
   List<Object?> get props => [message];
 }
-
-class LoginWithCredentials extends LoginEvent {
-  final String email;
-  final String password;
-
-  const LoginWithCredentials({
-    required this.email,
-    required this.password,
-  });
-
-  @override
-  List<Object?> get props => [email, password];
-}
