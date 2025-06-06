@@ -1,4 +1,3 @@
-// lib/features/cart/cubit/cart_cubit.dart
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../../domain/entities/food_item.dart';
@@ -14,6 +13,11 @@ class CartCubit extends Cubit<CartState> {
     required Restaurant restaurant,
     String note = '',
   }) {
+
+    if (state.isOrderSuccessful) {
+      emit(state.copyWith(isOrderSuccessful: false));
+    }
+
     final cartItem = CartItem(
       id: foodItem.id,
       name: foodItem.name,
@@ -70,8 +74,19 @@ class CartCubit extends Cubit<CartState> {
     emit(state.copyWith(items: updatedItems));
   }
 
+  void clearCartAfterSuccess() {
+    emit(state.copyWith(
+      items: [],
+      isOrderSuccessful: true,
+    ));
+  }
+
   void clearCart() {
     emit(const CartState());
+  }
+
+  void resetOrderStatus() {
+    emit(state.copyWith(isOrderSuccessful: false));
   }
 
   void updateItemNote(String itemId, String note) {

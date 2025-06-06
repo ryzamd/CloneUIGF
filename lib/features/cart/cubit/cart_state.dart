@@ -2,8 +2,12 @@ part of 'cart_cubit.dart';
 
 class CartState extends Equatable {
   final List<CartItem> items;
+  final bool isOrderSuccessful;
 
-  const CartState({this.items = const []});
+  const CartState({
+    this.items = const [],
+    this.isOrderSuccessful = false,
+  });
 
   bool get isEmpty => items.isEmpty;
   bool get isNotEmpty => items.isNotEmpty;
@@ -13,12 +17,18 @@ class CartState extends Equatable {
   String? get restaurantId => items.isNotEmpty ? items.first.restaurantId : null;
   String? get restaurantName => items.isNotEmpty ? items.first.restaurantName : null;
 
-  CartState copyWith({List<CartItem>? items}) {
-    return CartState(items: items ?? this.items);
+  CartState copyWith({
+    List<CartItem>? items,
+    bool? isOrderSuccessful,
+  }) {
+    return CartState(
+      items: items ?? this.items,
+      isOrderSuccessful: isOrderSuccessful ?? this.isOrderSuccessful,
+    );
   }
 
   @override
-  List<Object?> get props => [items];
+  List<Object?> get props => [items, isOrderSuccessful];
 }
 
 class CartItem extends Equatable {
