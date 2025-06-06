@@ -1,5 +1,6 @@
 import 'package:cloneuigrabfood/domain/entities/branch.dart';
 import 'package:cloneuigrabfood/domain/entities/restaurant.dart';
+import 'package:cloneuigrabfood/features/cart/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import '../constants/key_constant.dart';
 
@@ -36,16 +37,20 @@ class NavigationService {
     await navigator.pushNamed(AppRoutes.restaurants);
   }
 
-  static Future<void> toRestaurantDetail(
-    Restaurant restaurantId, {
-    required Branch branchId,
-  }) async {
+  static Future<void> toRestaurantDetail(Restaurant restaurantId, {required Branch branchId}) async {
     await navigator.pushNamed(
       AppRoutes.restaurantDetail,
       arguments: RestaurantDetailArguments(
         restaurantId: restaurantId,
         branchId: branchId,
       ),
+    );
+  }
+
+  static Future<void> toPayment(List<CartItem> cartItems) async {
+    await navigator.pushNamed(
+      AppRoutes.payment,
+      arguments: cartItems,
     );
   }
 
@@ -131,6 +136,7 @@ class AppRoutes {
   static const String restaurants = '/restaurants';
   static const String restaurantDetail = '/restaurant-detail';
   static const String branchSelection = '/branch-selection';
+  static const String payment = '/payment';
 
   AppRoutes._();
 }
