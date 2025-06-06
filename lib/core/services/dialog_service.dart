@@ -98,7 +98,7 @@ class DialogService {
     required String message,
     String? buttonText,
     VoidCallback? onPressed,
-    bool autoDismiss = true,
+    bool autoDismiss = false,
   }) {
     return NotificationDialog.showSuccess(
       context: context,

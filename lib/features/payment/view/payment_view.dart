@@ -33,7 +33,7 @@ class _PaymentViewState extends State<PaymentView> {
           body: BlocConsumer<PaymentBloc, PaymentState>(
             listener: (context, state) {
               if (state is PaymentSuccess) {
-                context.read<CartCubit>().clearCart();
+                context.read<CartCubit>().clearCartAfterSuccess();
                 _showSuccessAndNavigate(context);
               } else if (state is PaymentFailure) {
                 DialogService.showError(
@@ -45,13 +45,17 @@ class _PaymentViewState extends State<PaymentView> {
             builder: (context, state) {
               return BlocBuilder<CartCubit, CartState>(
                 builder: (context, cartState) {
-                  if (cartState.isEmpty) {
+                  if (cartState.isEmpty && !cartState.isOrderSuccessful) {
                     return const Center(
                       child: AppErrorWidget(
                         message: 'Giỏ hàng trống',
                         showRetryButton: false,
                       ),
                     );
+                  }
+
+                  if (cartState.isOrderSuccessful) {
+                    return const LoadingWidget(message: 'Đang hoàn tất đơn hàng...');
                   }
 
                   if (state is PaymentLoading) {
