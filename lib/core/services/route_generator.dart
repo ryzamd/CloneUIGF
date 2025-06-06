@@ -1,4 +1,8 @@
+import 'package:cloneuigrabfood/domain/entities/restaurant.dart';
 import 'package:cloneuigrabfood/features/auth/login/view/login_screen.dart';
+import 'package:cloneuigrabfood/features/restaurants/view/branch_selection_screen.dart';
+import 'package:cloneuigrabfood/features/restaurants/view/restaurant_detail_screen.dart';
+import 'package:cloneuigrabfood/features/restaurants/view/restaurants_screen.dart';
 import 'package:flutter/material.dart';
 import '../../features/dashboard/view/dashboard_screen.dart';
 import '../../features/welcome/view/welcome_screen.dart';
@@ -24,6 +28,16 @@ class RouteGenerator {
         
       case AppRoutes.restaurants:
         return _buildRoute(const RestaurantsScreen(), settings);
+
+      case AppRoutes.branchSelection:
+        final args = settings.arguments as Restaurant?;
+        if (args == null) {
+          return _buildErrorRoute('Restaurant required for BranchSelection');
+        }
+        return _buildRoute(
+          BranchSelectionScreen(restaurant: args),
+          settings,
+        );
         
       case AppRoutes.restaurantDetail:
         final args = settings.arguments as RestaurantDetailArguments?;
@@ -32,8 +46,8 @@ class RouteGenerator {
         }
         return _buildRoute(
           RestaurantDetailScreen(
-            restaurantId: args.restaurantId,
-            branchId: args.branchId,
+            restaurant: args.restaurantId,
+            branch: args.branchId,
           ),
           settings,
         );
@@ -97,26 +111,6 @@ class RegisterScreen extends StatelessWidget {
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
-  @override
-  Widget build(BuildContext context) => const Placeholder();
-}
-
-class RestaurantsScreen extends StatelessWidget {
-  const RestaurantsScreen({super.key});
-  @override
-  Widget build(BuildContext context) => const Placeholder();
-}
-
-class RestaurantDetailScreen extends StatelessWidget {
-  final String restaurantId;
-  final String? branchId;
-  
-  const RestaurantDetailScreen({
-    super.key,
-    required this.restaurantId,
-    this.branchId,
-  });
-  
   @override
   Widget build(BuildContext context) => const Placeholder();
 }
