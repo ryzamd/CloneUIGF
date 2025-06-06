@@ -1,3 +1,5 @@
+import 'package:cloneuigrabfood/domain/entities/branch.dart';
+import 'package:cloneuigrabfood/domain/entities/restaurant.dart';
 import 'package:flutter/material.dart';
 import '../constants/key_constant.dart';
 
@@ -35,8 +37,8 @@ class NavigationService {
   }
 
   static Future<void> toRestaurantDetail(
-    String restaurantId, {
-    String? branchId,
+    Restaurant restaurantId, {
+    required Branch branchId,
   }) async {
     await navigator.pushNamed(
       AppRoutes.restaurantDetail,
@@ -128,6 +130,7 @@ class AppRoutes {
   static const String profile = '/profile';
   static const String restaurants = '/restaurants';
   static const String restaurantDetail = '/restaurant-detail';
+  static const String branchSelection = '/branch-selection';
 
   AppRoutes._();
 }
@@ -135,12 +138,12 @@ class AppRoutes {
 abstract class RouteArguments {}
 
 class RestaurantDetailArguments extends RouteArguments {
-  final String restaurantId;
-  final String? branchId;
+  final Restaurant restaurantId;
+  final Branch branchId;
 
   RestaurantDetailArguments({
     required this.restaurantId,
-    this.branchId,
+    required this.branchId,
   });
 }
 
