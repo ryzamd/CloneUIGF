@@ -85,7 +85,7 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
         AppRoutes.restaurantDetail,
         arguments: RestaurantDetailArguments(
           restaurantId: restaurant,
-          branchId: restaurant.branches.first, // Assuming the first branch is selected
+          branchId: restaurant.branches.first,
         ),
       );
     }
@@ -99,9 +99,25 @@ class _RestaurantsScreenState extends State<RestaurantsScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            RestaurantSearchHeader(
-              controller: _searchController,
-              onBackPressed: () => NavigationService.goBack(),
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: () => NavigationService.goBack(),
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    child: const Icon(
+                      Icons.arrow_back_ios_new_outlined,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: RestaurantSearchHeader(
+                    controller: _searchController,
+                    onBackPressed: () => NavigationService.goBack(),
+                  ),
+                ),
+              ],
             ),
             
             FilterChipsSection(

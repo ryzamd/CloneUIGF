@@ -1,3 +1,5 @@
+import 'package:cloneuigrabfood/core/services/responsive_service.dart';
+import 'package:cloneuigrabfood/core/widgets/responsive_widget.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/constants/color_constant.dart';
 import '../../../../core/widgets/base_scaffold.dart';
@@ -13,33 +15,45 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseScaffold(
-      showAppBar: false,
-      backgroundColor: AppColors.white,
-      body: const SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    WelcomeBanner(),
-                    
-                    SearchBarWidget(),
-                    
-                    CategorySection(),
-                    
-                    FoodSection(),
-                    
-                    ShoppingSection(),
-                  ],
+    return ResponsiveWidget(
+      builder: (context, responsive) {
+        return BaseScaffold(
+          showAppBar: false,
+          backgroundColor: AppColors.white,
+          body: SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const WelcomeBanner(),
+        
+                        ResponsiveService.spacingVerticalSmall,
+        
+                        const SearchBarWidget(),
+
+                        ResponsiveService.spacingVerticalMedium,
+                        
+                        const CategorySection(),
+
+                        ResponsiveService.spacingVerticalMedium,
+                        
+                        const FoodSection(),
+
+                        const ShoppingSection(),
+
+                        ResponsiveService.spacingVerticalSmall,
+                      ],
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: const BottomButtons(),
+          ),
+          bottomNavigationBar: const BottomButtons(),
+        );
+      }
     );
   }
 }

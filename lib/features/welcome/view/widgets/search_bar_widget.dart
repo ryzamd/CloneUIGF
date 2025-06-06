@@ -6,36 +6,41 @@ class SearchBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      height: 48,
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.shadowLight,
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+    return ResponsiveWidget(
+      builder: (context, responsive) {
+        return Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: ResponsiveService.spacing16,
           ),
-        ],
-      ),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.search,
-            color: AppColors.mediumGrey,
+          padding: EdgeInsets.symmetric(horizontal: ResponsiveService.spacing16),
+          height: ResponsiveService.buttonHeightMedium,
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(ResponsiveService.borderRadiusLarge),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.shadowLight,
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
-          const SizedBox(width: 12),
-          Text(
-            'Tìm món ăn',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: AppColors.textHint,
-            ),
+          child: Row(
+            children: [
+              Icon(
+                Icons.search,
+                color: AppColors.mediumGrey,
+                size: ResponsiveService.iconSizeMedium,
+              ),
+              SizedBox(width: ResponsiveService.spacing12),
+              ResponsiveText.body(
+                text: 'Tìm món ăn',
+                style: const TextStyle(color: AppColors.textHint),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
