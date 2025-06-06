@@ -1,5 +1,7 @@
 import 'package:cloneuigrabfood/di/dependency_injection.dart';
+import 'package:cloneuigrabfood/features/cart/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/core.dart';
 
 void main() async {
@@ -18,19 +20,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: AppConfig.instance.appName,
-      theme: AppTheme.lightTheme,
-      
-      navigatorKey: AppKeys.navigatorKey,
-      scaffoldMessengerKey: AppKeys.scaffoldMessengerKey,
-      onGenerateRoute: RouteGenerator.generateRoute,
-      initialRoute: AppRoutes.welcome,
-      onUnknownRoute: (settings) => RouteGenerator.generateRoute(
-        RouteSettings(name: '/error', arguments: settings.arguments),
+     return BlocProvider(
+      create: (context) => CartCubit(),
+      child: MaterialApp(
+        title: AppConfig.instance.appName,
+        theme: AppTheme.lightTheme,
+        
+        navigatorKey: AppKeys.navigatorKey,
+        scaffoldMessengerKey: AppKeys.scaffoldMessengerKey,
+        onGenerateRoute: RouteGenerator.generateRoute,
+        initialRoute: AppRoutes.welcome,
+        onUnknownRoute: (settings) => RouteGenerator.generateRoute(
+          RouteSettings(name: '/error', arguments: settings.arguments),
+        ),
+        
+        debugShowCheckedModeBanner: false,
       ),
-      
-      debugShowCheckedModeBanner: false,
     );
   }
 }

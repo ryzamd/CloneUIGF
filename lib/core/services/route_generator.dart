@@ -1,5 +1,6 @@
 import 'package:cloneuigrabfood/domain/entities/restaurant.dart';
 import 'package:cloneuigrabfood/features/auth/login/view/login_screen.dart';
+import 'package:cloneuigrabfood/features/payment/view/payment_screen.dart';
 import 'package:cloneuigrabfood/features/restaurants/view/branch_selection_screen.dart';
 import 'package:cloneuigrabfood/features/restaurants/view/restaurant_detail_screen.dart';
 import 'package:cloneuigrabfood/features/restaurants/view/restaurants_screen.dart';
@@ -51,6 +52,9 @@ class RouteGenerator {
           ),
           settings,
         );
+        
+      case AppRoutes.payment:
+        return _buildRoute(const PaymentScreen(), settings);
         
       default:
         return _buildErrorRoute('Route not found: ${settings.name}');
