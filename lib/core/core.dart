@@ -1,3 +1,4 @@
+// lib/core/core.dart
 // Core Constants
 export 'constants/color_constant.dart';
 export 'constants/string_constant.dart';
@@ -12,6 +13,7 @@ export 'widgets/primary_button.dart';
 export 'widgets/custom_card.dart';
 export 'widgets/loading_widget.dart';
 export 'widgets/error_widget.dart';
+export 'widgets/responsive_widget.dart';
 
 // Dialogs
 export 'dialogs/error_dialog.dart';
@@ -23,6 +25,7 @@ export 'services/navigation_service.dart';
 export 'services/dialog_service.dart';
 export 'services/app_config.dart';
 export 'services/route_generator.dart';
+export 'services/responsive_service.dart';
 
 // Failures & Exceptions
 export 'failures/failure.dart';

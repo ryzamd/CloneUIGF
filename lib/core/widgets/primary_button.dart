@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants/color_constant.dart';
+import '../services/responsive_service.dart';
 
 enum ButtonSize { small, medium, large }
 enum ButtonType { primary, secondary, outline }
@@ -15,6 +16,7 @@ class PrimaryButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? textColor;
   final double? width;
+  final bool enableResponsive;
 
   const PrimaryButton({
     super.key,
@@ -28,10 +30,15 @@ class PrimaryButton extends StatelessWidget {
     this.backgroundColor,
     this.textColor,
     this.width,
+    this.enableResponsive = true,
   });
 
   @override
   Widget build(BuildContext context) {
+    if (enableResponsive) {
+      ResponsiveService.init(context);
+    }
+
     return SizedBox(
       width: width ?? double.infinity,
       height: _getButtonHeight(),
@@ -49,6 +56,17 @@ class PrimaryButton extends StatelessWidget {
   }
 
   double _getButtonHeight() {
+    if (enableResponsive) {
+      switch (size) {
+        case ButtonSize.small:
+          return ResponsiveService.buttonHeightSmall;
+        case ButtonSize.medium:
+          return ResponsiveService.buttonHeightMedium;
+        case ButtonSize.large:
+          return ResponsiveService.buttonHeightLarge;
+      }
+    }
+    
     switch (size) {
       case ButtonSize.small:
         return 36;
@@ -60,16 +78,24 @@ class PrimaryButton extends StatelessWidget {
   }
 
   ButtonStyle _getButtonStyle() {
+    final borderRadius = enableResponsive
+        ? ResponsiveService.borderRadiusMedium
+        : 8.0;
+    
+    final horizontalPadding = enableResponsive
+        ? _getResponsiveHorizontalPadding()
+        : _getHorizontalPadding();
+
     final baseStyle = ElevatedButton.styleFrom(
       elevation: type == ButtonType.outline ? 0 : 2,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(borderRadius),
         side: type == ButtonType.outline
             ? const BorderSide(color: AppColors.primaryGreen, width: 1)
             : BorderSide.none,
       ),
       padding: EdgeInsets.symmetric(
-        horizontal: _getHorizontalPadding(),
+        horizontal: horizontalPadding,
         vertical: 0,
       ),
     );
@@ -123,6 +149,17 @@ class PrimaryButton extends StatelessWidget {
     }
   }
 
+  double _getResponsiveHorizontalPadding() {
+    switch (size) {
+      case ButtonSize.small:
+        return ResponsiveService.spacing16;
+      case ButtonSize.medium:
+        return ResponsiveService.spacing20;
+      case ButtonSize.large:
+        return ResponsiveService.spacing24;
+    }
+  }
+
   double _getHorizontalPadding() {
     switch (size) {
       case ButtonSize.small:
@@ -150,16 +187,19 @@ class PrimaryButton extends StatelessWidget {
       );
     }
 
+    final fontSize = enableResponsive ? _getResponsiveFontSize() : _getFontSize();
+    final iconSpacing = enableResponsive ? ResponsiveService.spacing8 : 8.0;
+
     if (icon != null) {
       return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           icon!,
-          const SizedBox(width: 8),
+          SizedBox(width: iconSpacing),
           Text(
             text,
             style: TextStyle(
-              fontSize: _getFontSize(),
+              fontSize: fontSize,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -170,13 +210,35 @@ class PrimaryButton extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: _getFontSize(),
+        fontSize: fontSize,
         fontWeight: FontWeight.w500,
       ),
     );
   }
 
+  double _getResponsiveFontSize() {
+    switch (size) {
+      case ButtonSize.small:
+        return ResponsiveService.fontSizeSmall;
+      case ButtonSize.medium:
+        return ResponsiveService.fontSizeMedium;
+      case ButtonSize.large:
+        return ResponsiveService.fontSizeLarge;
+    }
+  }
+
   double _getLoadingSize() {
+    if (enableResponsive) {
+      switch (size) {
+        case ButtonSize.small:
+          return ResponsiveService.iconSizeSmall;
+        case ButtonSize.medium:
+          return ResponsiveService.iconSizeMedium;
+        case ButtonSize.large:
+          return ResponsiveService.iconSizeLarge;
+      }
+    }
+    
     switch (size) {
       case ButtonSize.small:
         return 16;
