@@ -1,6 +1,8 @@
 import 'package:cloneuigrabfood/domain/entities/restaurant.dart';
 import 'package:cloneuigrabfood/features/auth/login/view/login_screen.dart';
+import 'package:cloneuigrabfood/features/auth/logout/view/logout_screen.dart';
 import 'package:cloneuigrabfood/features/payment/view/payment_screen.dart';
+import 'package:cloneuigrabfood/features/profile/view/profile_screen.dart';
 import 'package:cloneuigrabfood/features/restaurants/view/branch_selection_screen.dart';
 import 'package:cloneuigrabfood/features/restaurants/view/restaurant_detail_screen.dart';
 import 'package:cloneuigrabfood/features/restaurants/view/restaurants_screen.dart';
@@ -55,7 +57,10 @@ class RouteGenerator {
         
       case AppRoutes.payment:
         return _buildRoute(const PaymentScreen(), settings);
-        
+
+      case AppRoutes.logout:
+        return _buildRoute(const LogoutScreen(), settings);
+      
       default:
         return _buildErrorRoute('Route not found: ${settings.name}');
     }
@@ -109,12 +114,6 @@ class RouteGenerator {
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
-  @override
-  Widget build(BuildContext context) => const Placeholder();
-}
-
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
   @override
   Widget build(BuildContext context) => const Placeholder();
 }

@@ -54,6 +54,10 @@ class NavigationService {
     );
   }
 
+  static Future<void> toLogout() async {
+    await navigator.pushNamed(AppRoutes.logout);
+  }
+
   static Future<T?> pushNamed<T>(String routeName, {Object? arguments}) async {
     return await navigator.pushNamed<T>(
       routeName,
@@ -137,6 +141,7 @@ class AppRoutes {
   static const String restaurantDetail = '/restaurant-detail';
   static const String branchSelection = '/branch-selection';
   static const String payment = '/payment';
+  static const String logout = '/logout';
 
   AppRoutes._();
 }
