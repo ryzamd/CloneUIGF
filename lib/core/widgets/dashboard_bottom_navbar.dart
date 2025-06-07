@@ -61,11 +61,6 @@ class _DashboardBottomNavBarState extends State<DashboardBottomNavBar> {
               activeIcon: Icon(Icons.chat_bubble),
               label: 'Tin nhắn',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle_outlined),
-              activeIcon: Icon(Icons.account_circle),
-              label: 'Tài khoản',
-            ),
           ],
         ),
       ),
@@ -85,10 +80,6 @@ class _DashboardBottomNavBarState extends State<DashboardBottomNavBar> {
         break;
       case 3:
         // Navigate to Messages
-        break;
-      case 4:
-        // Navigate to Profile
-        NavigationService.toProfile();
         break;
     }
   }

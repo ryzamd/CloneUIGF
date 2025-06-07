@@ -128,10 +128,13 @@ class DashboardView extends StatelessWidget {
                                     ),
                                     shape: BoxShape.circle,
                                   ),
-                                  child: const Icon(
-                                    Icons.person,
-                                    color: AppColors.white,
-                                    size: 24,
+                                  child: GestureDetector(
+                                    onTap: () => NavigationService.toProfile(),
+                                    child: const Icon(
+                                      Icons.person,
+                                      color: AppColors.white,
+                                      size: 24,
+                                    ),
                                   ),
                                 ),
                               ],
